@@ -1,0 +1,19 @@
+{
+  "name": "async-snippets",
+  "version": "1.0.0",
+  "description": "Snippets for a talk about asynchronicity in JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcinwysocki/async-snippets.git"
+  },
+  "author": "Marcin Wysocki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marcinwysocki/async-snippets/issues"
+  },
+  "homepage": "https://github.com/marcinwysocki/async-snippets#readme"
+}
