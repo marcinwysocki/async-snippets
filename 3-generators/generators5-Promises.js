@@ -24,8 +24,7 @@ function wrapper(gen) {
         }
 
         return value
-            .then(res => handleGenResult(generator.next(res)))
-            .catch(err => handleGenResult(generator.throw(err)));
+            .then(res => handleGenResult(generator.next(res)));
     };
 
     return handleGenResult(generator.next());
