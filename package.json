@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/marcinwysocki/async-snippets/issues"
   },
-  "homepage": "https://github.com/marcinwysocki/async-snippets#readme"
+  "homepage": "https://github.com/marcinwysocki/async-snippets#readme",
+  "dependencies": {
+    "js-csp": "^1.0.1"
+  }
 }
