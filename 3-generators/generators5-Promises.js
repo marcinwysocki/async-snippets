@@ -9,19 +9,63 @@ function* generator() {
     return value;
 }
 
-// function wrapper(generator) {
-//     const gen = generator();
-//     return new Promise((resolve, reject) => {
-//         const execute = (promise) => {
-//             const { value, done } = gen.next();
+/**
+ * Naiwna implementacja wrappera a la co
+ */
 
-//             if (done) {
-//                 resolve(value);
-//             }
+function wrapper(gen) {
+    const generator = gen();
 
-//             value.then(value => {
-//                 gen.next(value);
-//             });
-//         }
-//     });
-// }
+    const handleGenResult = result => {
+        const { value, done } = result;
+
+        if (done) {
+            return Promise.resolve(value);
+        }
+
+        return value
+            .then(res => handleGenResult(generator.next(res)))
+            .catch(err => handleGenResult(generator.throw(err)));
+    };
+
+    return handleGenResult(generator.next());
+}
+
+/**
+ * Przykład zastosowania
+ */
+
+const promise = wrapper(function*() {
+    const value = yield Promise.resolve(5);
+    const anotherValue = yield Promise.resolve(4);
+
+    return value + anotherValue;
+});
+
+promise.then(console.log); // 9
+
+/**
+ * Wersja z obsługą błędów
+ */
+
+function wrapper(gen) {
+    const generator = gen();
+
+    const execute = result => {
+        const { value, done } = result;
+
+        if (done) {
+            return Promise.resolve(value);
+        }
+
+        return value
+            .then(res => execute(generator.next(res)))
+            .catch(err => execute(generator.throw(err)));
+    };
+
+    try {
+        return execute(generator.next());
+    } catch (ex) {
+        return Promise.reject(ex);
+    }
+}
