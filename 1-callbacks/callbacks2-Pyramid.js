@@ -7,14 +7,14 @@ fs.readFile('./users.csv', (err, users) => {
         throw err;
     }
 
-    const parsed = parse(data);
-    getDetails(users, (err, usersWithDetails) => {
+    const parsed = parse(users);
+    getDetails(parsed, (err, usersWithDetails) => {
         if (err) {
             throw err;
         }
 
         const csv = toCSV(usersWithDetails);
-        fs.writeFile('withDetails.csv', csv, (err, data) => {
+        fs.writeFile('withDetails.csv', csv, err => {
             if (err) {
                 throw err;
             }
