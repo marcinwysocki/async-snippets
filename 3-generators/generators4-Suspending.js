@@ -21,7 +21,7 @@ function* gen() {
 
 const generator = gen(); // gen {<suspended>}
 
-generator.next(); // Stop, { value: 3, done: false }
-generator.next(); // Result: 4, { value: 5, done: false }
-generator.next(); // { value: 'Hello CodeMeetings', done: false }
-generator.next('abc'); // Value: abc, STOP, { value: 'abc', done: true }
+console.log(generator.next()); // START, { value: 3, done: false }
+console.log(generator.next()); // Result: 4, { value: 5, done: false }
+console.log(generator.next()); // { value: 'Hello CodeMeetings', done: false }
+console.log(generator.next('abc')); // Value: abc, STOP, { value: 'abc', done: true }
